@@ -1,0 +1,39 @@
+<!DOCTYPE html> 
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Filmays</title>
+  </head>
+
+  <body>
+  
+    <h1>Filmays</h1>
+	<ul>
+
+	</ul>
+	
+	<p>Cada vez hay más accesibilidad para ver películas, mediante servicios online que permiten 
+	verlas desde cualquier sitio ,mediante alguna suscripción, o incluso alquilar películas online
+	 por poco dinero.</p><p> Por esta razón queremos desarrollar Filmays, una aplicación
+	  que permita buscar información, valoración, trailer y  merchandising de alguna película concreta.
+	  Pudiendo además crear lista de peliculas pendientes por ver, lista de peliculas favoritas, etc. </p>
+	  
+	  
+	  <a href="Search.jsp"> Pulsa aquí para realizar una busqueda</a>
+	  <div id="searchDiv">
+		<form id="searchForm" action="SearchController" method="post">
+			Busqueda de pelicula: <input type="text" name="searchQuery" required/> 
+			<input type="submit" name="searchBtn" title="search" value="search">
+		</form>
+	</div>
+	
+	<c:if test='${empty sessionScope["Spotify-token"]}'>
+	   <c:redirect url = "/AuthController/Spotify"/>
+	</c:if>
+		<form method="post" action="/TrackSearchController">
+		<label>Busqueda de la Banda Sonora:</label><textarea name="busqueda"></textarea>
+		<button type="submit" class="button">Buscar en Spotify</button>
+		</form>
+
+  </body>
+</html>
