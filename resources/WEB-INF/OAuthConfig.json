@@ -4,6 +4,6 @@
 		"clientId":"b680123fd6424c969716463a05fe0d80",
 		"clientSecret":"7300f44858c8457fb43f0e9979131bb4" ,
 		"authorizationFormUrl":"https://accounts.spotify.com/authorize",
-		"scopes":["user-read-private","user-read-email"]
+		"scopes":["user-read-private","user-read-email","playlist-modify-public","playlist-read-private", "playlist-modify-private"]
 	}
 }		

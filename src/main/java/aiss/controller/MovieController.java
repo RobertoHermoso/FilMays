@@ -1,6 +1,7 @@
 package aiss.controller;
 
 import java.io.IOException;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,30 +19,31 @@ public class MovieController extends HttpServlet  {
 	
 private static final long serialVersionUID = 1L;
     
-	private static final Logger log = Logger.getLogger(SearchController.class.getName());
+	private static final Logger log = Logger.getLogger(MovieController.class.getName());
 	
 	   public MovieController() {
 	        super();
 	    }
 	   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		   
-		String query = request.getParameter("searchQuery");
-		RequestDispatcher rd = null;
-		
-		// Search for movies in TMDB
-		log.log(Level.FINE, "Searching for TMDB movies that contain the id " + query);
-		TMDBResource tmdb = new TMDBResource();
-		Movie tmdbResult = tmdb.getMovie(query);
-		if (tmdbResult!=null){
-			request.setAttribute("movieID", tmdbResult);	
-			rd = request.getRequestDispatcher("/success.jsp");
+			String ListID = request.getParameter("ListID");
+			String query = request.getParameter("searchQuery");
+			RequestDispatcher rd = null;
 			
-		} else {
-			log.log(Level.SEVERE, "TMDB object: " + tmdbResult);
-			rd = request.getRequestDispatcher("/error.jsp");
-			}
-		rd.forward(request, response);
-	   }
+			// Search for movies in TMDB
+			log.log(Level.FINE, "Searching for TMDB movies that contain the id " + query);
+			TMDBResource tmdb = new TMDBResource();
+			Movie tmdbResult = tmdb.getMovie(query);
+			if (tmdbResult!=null){
+				request.setAttribute("movieID", tmdbResult);	
+				rd = request.getRequestDispatcher("/success.jsp");
+				
+			} else {
+				log.log(Level.SEVERE, "TMDB object: " + tmdbResult);
+				rd = request.getRequestDispatcher("/error.jsp");
+				}
+			rd.forward(request, response);
+		   }
 	   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			doGet(request, response);
 		}

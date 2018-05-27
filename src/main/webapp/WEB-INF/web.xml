@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+
+<context-param>
+    <param-name>resteasy.servlet.mapping.prefix</param-name>
+    <param-value>/api</param-value>
+  </context-param>
+  <servlet>
+    <servlet-name>Resteasy</servlet-name>
+    <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+    <init-param>
+      <param-name>javax.ws.rs.Application</param-name>
+      <param-value>aiss.api.FilmaysAplication</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Resteasy</servlet-name>
+    <url-pattern>/api/*</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>HelloWorld</servlet-name>
     <servlet-class>aiss.HelloWorldServlet</servlet-class>
@@ -37,6 +55,31 @@
     <servlet-name>TrackSearchController</servlet-name>
     <url-pattern>/TrackSearchController</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+    <description></description>
+    <display-name>AddTrackController</display-name>
+    <servlet-name>AddTrackController</servlet-name>
+    <servlet-class>aiss.controller.AddTrackController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddTrackController</servlet-name>
+    <url-pattern>/AddTrackController</url-pattern>
+  </servlet-mapping>
+  
+  
+   <servlet>
+    <description></description>
+    <display-name>SelectedMovieController</display-name>
+    <servlet-name>SelectedMovieController</servlet-name>
+    <servlet-class>aiss.controller.SelectedMovieController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SelectedMovieController</servlet-name>
+    <url-pattern>/SelectedMovieController</url-pattern>
+  </servlet-mapping>
+  
+  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
@@ -65,11 +108,12 @@
     </init-param>
     <init-param>
       <param-name>onSuccess</param-name>
-      <param-value>close</param-value>
+      <param-value>redirect:/index.html</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>SpotifyOAuth2Callback</servlet-name>
     <url-pattern>/oauth2callback/Spotify</url-pattern>
   </servlet-mapping>
+ 
 </web-app>

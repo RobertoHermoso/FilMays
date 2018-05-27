@@ -1,6 +1,11 @@
 
 package aiss.model.Spotify;
 
+import java.util.HashMap;
+import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -14,19 +19,21 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Image {
 
     @JsonProperty("height")
-    private Integer height;
+    private Object height;
     @JsonProperty("url")
     private String url;
     @JsonProperty("width")
-    private Integer width;
+    private Object width;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("height")
-    public Integer getHeight() {
+    public Object getHeight() {
         return height;
     }
 
     @JsonProperty("height")
-    public void setHeight(Integer height) {
+    public void setHeight(Object height) {
         this.height = height;
     }
 
@@ -41,13 +48,23 @@ public class Image {
     }
 
     @JsonProperty("width")
-    public Integer getWidth() {
+    public Object getWidth() {
         return width;
     }
 
     @JsonProperty("width")
-    public void setWidth(Integer width) {
+    public void setWidth(Object width) {
         this.width = width;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
     }
 
 }

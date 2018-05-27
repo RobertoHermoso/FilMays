@@ -13,10 +13,18 @@
 	   <c:redirect url = "/AuthController/Spotify"/>
 	</c:if>
 	
+Id user = <c:out value="${requestScope.User.id}"/>	
 <h1>Canciones de Spotify</h1>
 <c:forEach items="${requestScope.Tracks.tracks.items}" var="item" begin="1" end= "1">
 <iframe src="https://open.spotify.com/embed?uri=spotify:album:<c:out value="${item.album.id}"/>" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
 </c:forEach>
+<legend>
+			Resultados de búsqueda en Spotify para 
+			<c:out value="${param.searchQuery}" />
+		</legend>
+<c:forEach items="${requestScope.Tracks.tracks.items}" var="item" begin="1" end= "1">
+<iframe src="https://open.spotify.com/embed?uri=spotify:album:<c:out value="${item.album.id}"/>" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+	</c:forEach>
 </body>
 </html>

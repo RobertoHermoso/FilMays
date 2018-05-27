@@ -2,6 +2,7 @@ package aiss.controller;
 
 import java.io.IOException;
 
+
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import aiss.model.Spotify.SpotifyTrack;
+import aiss.model.Spotify.PL.PlayListsUser;
+import aiss.model.Spotify.U.*;
 import aiss.model.resources.SpotifyResource;
 
 /**
@@ -36,7 +39,12 @@ public class TrackSearchController extends HttpServlet {
 		if(accessToken!=null && !"".equals(accessToken)){
 		SpotifyResource sr=new SpotifyResource(accessToken);
 		SpotifyTrack SP=sr.getSearch(request.getParameter("busqueda"));
+		User u = sr.getCurrentlyUser();
+		PlayListsUser pl = sr.getPlayListUser();
+		
+		request.setAttribute("User", u);
 		request.setAttribute("Tracks", SP);
+		request.setAttribute("pl", pl);
 		request.getRequestDispatcher("/TrackView.jsp").forward(request, response);
 		}else {
 			log.info("Trying to acces to Spotify without an acces token, redirecting to OAuth servlet");
